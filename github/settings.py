@@ -76,14 +76,10 @@ WSGI_APPLICATION = 'github.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'github',
-        'USERNAME': 'nirjhari',
-        "PASSWORD": 'abc123'
-    }
-}
+
+DATABASES = {}
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
@@ -125,3 +121,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+
+try:
+    from github.local_settings import *
+except:
+    pass
