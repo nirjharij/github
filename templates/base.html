@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% block title %}
+        {% endblock %}
+
+
+        <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/bootstrap.min.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+        {% block css-required %}
+        {% endblock %}
+
+        <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/style.css?v=0.2">
+    </head>
+
+    <!-- Main Body -->
+    <body  id="page-top" class="index">
+
+    </body>
+
+    {% block url-required %}
+    <script>
+        var CREATE_FOLDER = '{% url "createFolder" %}';
+    </script>
+    {% endblock %}
+    <script type="text/javascript" language="javascript" src="{% get_static_prefix %}js/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="{% get_static_prefix %}js/bootstrap.min.js"></script>
+
+    {% block js-required %}
+    {% endblock %}
+
+</html>

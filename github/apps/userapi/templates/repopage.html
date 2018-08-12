@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/bootstrap.min.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% get_static_prefix %}css/style.css?v=0.2">
+
+    </head>
+
+    <!-- Main Body -->
+    <body>
+        <div class="col-md-12">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active" style="background-color: #5e5e5e"><a href="#">User <strong>{{ username }}</strong> Repo Contents</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10" id="title-div">
+
+                {% if bread %}
+                <ol class="breadcrumb" style="background-color: #2E2E2E; margin-left: 105px; margin-top: 50px;">
+                    {% for b, b1 in bread %}
+                    <li class="active"><a href="{% url 'repodata' %}?repo={{ repo }}&dir={{ b1 }}">{{ b }}</a></li>
+                    {% endfor %}
+                </ol>
+                {% endif %}
+
+        </div>
+
+        <div class="col-md-10" id="folder-div" style="margin-left: 110px;">
+            <span class="list-group folder" id="folder" style="background-color: #8c8c8c">
+                {% for directory in directories %}
+                <a style="margin-right: 120px" href="{% url 'repodata' %}?repo={{ repo }}&dir={{ current_directory }}/{{ directory }}" id={{directory}} class="dir-link list-group-item">
+                    <i class="glyphicon glyphicon-folder-open"></i> &nbsp;&nbsp;&nbsp;{{directory}}
+                    <input type="hidden" value='{{current_directory}}' id='path-{{directory}}'>
+                </a>
+                {% endfor %}
+                {% for file in files %}
+                <a style="margin-right: 120px" href="{% url 'download' %}?repo={{ repo }}&dir={{ current_directory }}/{{ file }}" id={{file}} class="dir-link list-group-item">
+                    <i class="glyphicon glyphicon glyphicon-file"></i> &nbsp;&nbsp;&nbsp;{{file}}
+                    <input type="hidden" value='{{current_directory}}' id='path-{{file}}'>
+                </a>
+                {% endfor %}
+            </span>
+        </div>
+
+    </body>
+
+
+    <script>
+        var REPODATA = '{% url "repodata" %}';
+    </script>
+
+    <script type="text/javascript" language="javascript" src="{% get_static_prefix %}js/jquery.min.js"></script>
+    <script type="text/javascript" language="javascript" src="{% get_static_prefix %}js/bootstrap.min.js"></script>
+    <script type="text/javascript" language="javascript" src="{% get_static_prefix %}js/app.js"></script>
+
+
+
+</html>
